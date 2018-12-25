@@ -31,7 +31,7 @@ Learning electronic and programming with Raspberry Pi
 * [Picamera effects]()
 * [Picamera exposure modes]()
 * [Picamera white balance]()
-* [Picamera text on video]
+* [Picamera text on video]()
 
 
 
