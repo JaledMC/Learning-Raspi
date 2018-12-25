@@ -1,16 +1,7 @@
 # Learning-Raspi
 Learning electronic and programming with Raspberry Pi
 
-# References
-    * [Hackster](https://www.hackster.io/raspberry-pi/projects?sort=trending&page=3)
-    * [Pimylifeup](https://pimylifeup.com/)
-    * [pyimagesearch](https://www.pyimagesearch.com/)
-    * [raspberrypi.org](https://projects.raspberrypi.org/en)
-
 * [Raspberry setup]()
-* []()
-
-
 
 # Code examples
     Digital write: 
@@ -139,3 +130,10 @@ https://projects.raspberrypi.org/en/projects/python-quick-reaction-game/7
 Program via web
 
 [raspberry fan gpios initialization](https://hackernoon.com/how-to-control-a-fan-to-cool-the-cpu-of-your-raspberrypi-3313b6e7f92c)
+
+
+# References
+* [Hackster](https://www.hackster.io/raspberry-pi/projects?sort=trending&page=3)
+* [Pimylifeup](https://pimylifeup.com/)
+* [pyimagesearch](https://www.pyimagesearch.com/)
+* [raspberrypi.org](https://projects.raspberrypi.org/en)
