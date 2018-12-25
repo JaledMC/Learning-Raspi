@@ -7,6 +7,38 @@ Learning electronic and programming with Raspberry Pi
 * [Led blink]()
 * [Knight rider]()
 * [Buttons polling]()
+* [Control buttons with events]()
+* [Piano button]()
+* [Keypad]()
+
+* [Arduino analog read]()
+* [Arduino I2C communication]()
+* [LCD 2004 I2C]()
+
+* [Raspi ultrasonic sensor library]()
+* [Ultrasonic sensor]()
+* [Ultrasonic sensor with event]()
+
+* [Hardware PWM]()
+* [Servo control]()
+
+* [USB camera display]()
+* [Picamera]()
+* [Picamera capture]()
+* [Picamera video capture]()
+* [Picamera resize]()
+* [Picamera brightness & contrast]()
+* [Picamera effects]()
+* [Picamera exposure modes]()
+* [Picamera white balance]()
+* [Picamera text on video]
+
+
+
+
+
+
+
 https://projects.raspberrypi.org/en/projects/python-quick-reaction-game
 https://makezine.com/projects/tutorial-raspberry-pi-gpio-pins-and-python/
 * [Interruptions](https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/)
