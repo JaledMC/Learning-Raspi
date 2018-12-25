@@ -1,10 +1,9 @@
 # Learning-Raspi
 Learning electronic and programming with Raspberry Pi
 
-# [Raspberry setup]()
+# [Raspberry setup](https://github.com/JaledMC/Learning-Raspi/wiki/Raspberry-setup)
 
 # Code examples
-    Digital write: 
 * [Led blink]()
 * [Knight rider]()
 * [Buttons polling]()
@@ -69,69 +68,38 @@ SIM800L
 
 
 
-# Projects
+# Cool projects TODO
+* [Arcade machine](https://www.youtube.com/watch?v=psWCmLwvWBE)
+    https://pimylifeup.com/raspberry-pi-dosbox/
+
 * [Kodi Media Center](https://pimylifeup.com/raspberry-pi-xbmc-media-center/)
-* [Arcade machine](https://www.youtube.com/watch?v=psWCmLwvWBE)    
-https://pimylifeup.com/raspberry-pi-dosbox/
 * [Kiosk](https://pimylifeup.com/raspberry-pi-kiosk/)
 * [Smart Mirror](https://hackaday.io/project/13466-raspberry-pi-smart-mirror)
-https://magicmirror.builders/
-* []()
+    https://magicmirror.builders/
+
 * [Robot](https://www.instructables.com/id/Raspberry-Pi-Web-Controlled-Autonomous-Robot/)
-* [Weather station]()
-https://projects.raspberrypi.org/en/projects/temperature-log
+* [Weather station](https://projects.raspberrypi.org/en/projects/temperature-log)
+
 * [Web](https://www.instructables.com/id/Simple-and-intuitive-web-interface-for-your-Raspbe/)
+* [Web Server](https://pimylifeup.com/raspberry-pi-nginx/)
+    https://pimylifeup.com/raspberry-pi-web-server/
+    https://pimylifeup.com/raspberry-pi-plex-server/
+    https://maker.pro/raspberry-pi/projects/raspberry-pi-web-server
+
 * [TOR access point](https://pimylifeup.com/raspberry-pi-tor-access-point/)
 * [VPN](https://pimylifeup.com/raspberry-pi-vpn-access-point/)
-* [Web Server](https://pimylifeup.com/raspberry-pi-nginx/)
-https://pimylifeup.com/raspberry-pi-web-server/
-https://pimylifeup.com/raspberry-pi-plex-server/
+* [Pirate radio](https://pimylifeup.com/raspberry-pi-pirate-radio/)
+
+* [Webcam server]()
+* [Camera detection]()
+* [Time lapse]()
 
 * [Telegram](https://pimylifeup.com/raspberry-pi-telegram-bot/)
 * [Cloud](https://pimylifeup.com/raspberry-pi-owncloud/)
-
-* [Pirate radio](https://pimylifeup.com/raspberry-pi-pirate-radio/)
-* [Webcam server]()
-* [Time lapse]()
-* [Camera detection]()
 * [Twitter Bot](https://pimylifeup.com/raspberry-pi-twitter-bot/)
 * [Alexa](https://pimylifeup.com/raspberry-pi-alexa/)
 * [Google assistant](https://pimylifeup.com/raspberry-pi-google-assistant/)
-
     
-    
-
-
-
-https://projects.raspberrypi.org/en/projects/the-all-seeing-pi
-
-
-
-Programs
-    Python image
-    Excel
-
-
-
-
-
-Server
-Server
-    Personal Cloud
-Pirate Radio
-Telegram
-
-
-https://maker.pro/raspberry-pi/projects/raspberry-pi-web-server
-Temperature log
-
-SMS
-https://projects.raspberrypi.org/en/projects/python-quick-reaction-game/7
-Program via web
-
-[raspberry fan gpios initialization](https://hackernoon.com/how-to-control-a-fan-to-cool-the-cpu-of-your-raspberrypi-3313b6e7f92c)
-
-
 # References
 * [Hackster](https://www.hackster.io/raspberry-pi/projects?sort=trending&page=3)
 * [Pimylifeup](https://pimylifeup.com/)
