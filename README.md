@@ -1,7 +1,88 @@
 # Learning-Raspi
 Learning electronic and programming with Raspberry Pi
 
-# [Raspberry setup](https://github.com/JaledMC/Learning-Raspi/wiki/Raspberry-setup)
+# Raspberry setup
+Setup Format the SD card in FAT32 Download NOOBS, and copy all files in the zip to the SD card. It’s the easiest way to install Ubuntu Mate or Raspbian, but we can use Chromium too. PD: At present, all OS are 32 bits. Put the SD in the RBpi, connect the keyboard, mouse, display and supply. If the RBpi has bluetooth, we can configure it to use a wireless keyboard and mouse from now.
+
+Install arduino IDE Alternatively, open Chrome on your Raspberry Pi, head to magpi.cc/2tPw8ht, and click the Linux ARM link under ‘Download the IDE’. Extract the file to your /opt directory , then open a Terminal and run the install.sh script to install. cd Downloads/ tar -xf arduino-1.8.3-linuxarm.tar.xz sudo mv arduino-1.8.3 /opt sudo /opt/arduino-1.8.3/install.sh
+
+Install opencv
+
+https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0
+
+Password Your username and password are used for numerous things, including SSHing into your Pi from another machine. It is recommended that you change these defaults for security reasons. Username: pi Password: raspberry
+
+To change password, use “sudo passwd” command.
+
+If raspbian freezes, disconnect usbs and HDMi can help. Disconnect supply could corrupt system files. Use ctrl+alt+f1 to switch to kernel, and use sudo reboot. To return to GUI, use ctrl+alt+f7
+
+Read only!
+
+https://www.raspberrypi-spy.co.uk/2014/11/enabling-the-i2c-interface-on-the-raspberry-pi/ install i2c tools to know the devices address sudo apt-get install i2c-tools Install smbus to use i2c pins and reboot apt-get install python-smbus
+
+raspberry fan gpios initialization
+
+
+# GPIO control
+Overview
+BCM vs BOARD
+To use the GPIO pins two different numerations can be used: board(with the numerical position for each pin),
+and BCM, the special numeration of broadcom. But this last form is not the same for every raspberry model
+
+GPIO.cleanup()
+When program finish, when using a keyboard interruption or normal end, ports used stay in their last state, and that can be dangerous, and the IDE shows a warning.
+This method cleans all ports used before. Because of that, don’t use it at the beginning.
+
+
+Use this template:
+
+def main():
+    while True:
+        ...
+        
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        ...
+        pass
+    finally:
+        GPIO.cleanup()
+
+
+# Run programs at startup
+Run a script with rc.local or cron
+https://www.raspberrypi.org/documentation/linux/usage/rc-local.md https://www.raspberrypi.org/documentation/linux/usage/cron.md
+
+
+# Remote access
+IP static and SSH https://www.prometec.net/raspberry-pi-ip-estatica/
+
+https://www.raspberrypi.org/documentation/remote-access/ssh/unix.md https://www.raspberrypi.org/documentation/remote-access/ssh/
+
+We have to enable ssh in ifconfigidsf2
+
+Right click on wifi-wire network and open settings We can use GUI programs with -Y
+
+To remove ip host ssh-keygen -R 192.168.3.10
+
+TCPIP https://www.prometec.net/tcpip/ Mascaras https://fireosoft.com.co/blogs/para-que-sirve-la-mascara-de-red/ static IP configuration and access ssh https://www.raspberrypi.org/documentation/remote-access/ssh/unix.md https://www.prometec.net/raspberry-pi-ip-estatica/ GUI remote access with VNC https://www.prometec.net/rpi-acceso-remoto-grafico/
+
+VNC https://www.prometec.net/rpi-acceso-remoto-grafico/ https://www.raspberrypi.org/documentation/remote-access/vnc/ Don’t use :1 when raspberry uses desktop interface, it will appear a grey screen. Use :2 Compartir ficheros https://www.atareao.es/tutorial/raspberry-pi-primeros-pasos/compartir-archivos-mediante-sftp-y-sshfs/ we can drag a folder of pi on the terminal to know the path and use cd.
+
+# Watchdog configuration
+watchdog https://www.raspberrypi.org/forums/viewtopic.php?p=1303872
+
+# 3G Dongle
+
+
+https://www.raspberrypi.org/forums/viewtopic.php?p=1197625 Important, don’t use any static ip. Autoconfiguration
+
+Shutdown wifi at startup
+
+http://www.magdiblog.fr/divers/ssh-connect-back-comment-garder-la-main-sur-un-raspberry-pi-connecte-a-internet-via-un-dongle-3g/ https://raspberrypi.stackexchange.com/questions/32384/ssh-into-raspberry-pi-with-3g-modem-connected https://raspberrypi.stackexchange.com/questions/46191/remote-control-a-raspberry-pi-currently-behind-a-restricted-wifi-network https://raspberrypi.stackexchange.com/questions/34556/how-to-connect-to-the-raspberry-pi-through-3g-dongle https://raspberrypi.stackexchange.com/questions/23803/how-can-i-access-my-pi-that-is-connected-to-a-3g-network-from-the-outside-intern https://www.reddit.com/r/raspberry_pi/comments/3bm7xd/how_to_ssh_into_raspi_using_3g_modem/ https://zieren.de/raspberry-pi/reverse-ssh-through-3gnat/ https://superuser.com/questions/888491/is-it-possbile-to-ssh-in-linux-from-a-3g-usb-stick-from-t-mobile-with-raspberry https://bandaancha.eu/foros/ofrece-movistar-ip-publica-conexion-3g-1727037 https://www.forocoches.com/foro/showthread.php?t=4923975 https://www.adslzone.net/foro/banda-ancha-movil-3g-y-4g.101/ip-publicas.361239/ https://www.matooma.com/es/noticias/las-tarjetas-sim-m2m-la-mejor-opcion-para-conectar-los-dispositivos http://director-it.com/index.php/es/ssoluciones/comunicacion-entre-maquinas/225-elegir-una-tarjeta-sim.html https://www.tendencias21.net/telefonica/Que-es-la-comunicacion-M2M_a801.html https://www.gemalto.com/latam/iot/m2m/soluciones/mim https://www.raspberrypi.org/forums/viewtopic.php?t=22312
+
+
 
 # Code examples
 * [Led blink](https://github.com/JaledMC/Learning-Raspi/blob/master/Examples/blinkLed.py)
