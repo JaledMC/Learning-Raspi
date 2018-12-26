@@ -6,7 +6,7 @@ The easiest way to run with raspberry is installing NOOBS in a FAT32 SD. Other O
 
 First step must be change default password, for security reasons, like ssh access. Use “sudo passwd” command. Username: pi Password: raspberry  
 
-Later, update the system:
+Later, update the system:  
 `sudo apt-get update`  
 `sudo apt-get upgrade`  
 
@@ -16,9 +16,11 @@ For **Arduino installation**:
 `sudo apt-get install arduino`  
 
 For **Opencv installation**: 
+<pre>
 `sudo apt-get install libhdf5-dev libhdf5-serial-dev`  
 `sudo apt-get install libqtwebkit4 libqt4-test`   
 `sudo pip install opencv-contrib-python`   
+</pre>
 
 # GPIO control
 With GPIO pins, two different numerations can be used: BOARD (with the numerical position for each pin),
