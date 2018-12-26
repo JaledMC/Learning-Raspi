@@ -2,60 +2,58 @@
 Learning electronic and programming with Raspberry Pi
 
 # Raspberry setup
-Setup Format the SD card in FAT32 Download NOOBS, and copy all files in the zip to the SD card. It’s the easiest way to install Ubuntu Mate or Raspbian, but we can use Chromium too. PD: At present, all OS are 32 bits. Put the SD in the RBpi, connect the keyboard, mouse, display and supply. If the RBpi has bluetooth, we can configure it to use a wireless keyboard and mouse from now.
+The easiest way to run with raspberry is installing NOOBS in a FAT32 SD. Other OS like Ubuntu Mate, Raspbian, or Chromium are valid too. PD: At present, all OS are 32 bits. 
 
-Install arduino IDE Alternatively, open Chrome on your Raspberry Pi, head to magpi.cc/2tPw8ht, and click the Linux ARM link under ‘Download the IDE’. Extract the file to your /opt directory , then open a Terminal and run the install.sh script to install. cd Downloads/ tar -xf arduino-1.8.3-linuxarm.tar.xz sudo mv arduino-1.8.3 /opt sudo /opt/arduino-1.8.3/install.sh
+First step must be change default password, for security reasons, like ssh access. Use “sudo passwd” command. Username: pi Password: raspberry  
 
-Install opencv
+Later, update the system:
+`sudo apt-get update`
+`sudo apt-get upgrade`
 
-https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0
+If raspbian freezes, disconnect usbs and HDMi can help. Disconnect supply could corrupt system files. Use ctrl+alt+f1 to switch to kernel, and use sudo reboot. To return to GUI, use ctrl+alt+f7  
 
-Password Your username and password are used for numerous things, including SSHing into your Pi from another machine. It is recommended that you change these defaults for security reasons. Username: pi Password: raspberry
+For **Arduino installation**:
+`sudo apt-get install arduino`
 
-To change password, use “sudo passwd” command.
-
-If raspbian freezes, disconnect usbs and HDMi can help. Disconnect supply could corrupt system files. Use ctrl+alt+f1 to switch to kernel, and use sudo reboot. To return to GUI, use ctrl+alt+f7
-
-Read only!
-
-https://www.raspberrypi-spy.co.uk/2014/11/enabling-the-i2c-interface-on-the-raspberry-pi/ install i2c tools to know the devices address sudo apt-get install i2c-tools Install smbus to use i2c pins and reboot apt-get install python-smbus
-
-raspberry fan gpios initialization
-
+For **Opencv installation**: 
+`sudo apt-get install libhdf5-dev libhdf5-serial-dev`
+`sudo apt-get install libqtwebkit4 libqt4-test`
+`sudo pip install opencv-contrib-python`
 
 # GPIO control
-Overview
-BCM vs BOARD
-To use the GPIO pins two different numerations can be used: board(with the numerical position for each pin),
-and BCM, the special numeration of broadcom. But this last form is not the same for every raspberry model
+With GPIO pins, two different numerations can be used: BOARD (with the numerical position for each pin),
+and BCM, the special numeration of broadcom. But this last form is not the same for every raspberry model.
 
-GPIO.cleanup()
-When program finish, when using a keyboard interruption or normal end, ports used stay in their last state, and that can be dangerous, and the IDE shows a warning.
-This method cleans all ports used before. Because of that, don’t use it at the beginning.
+When program finish, using a keyboard interruption or execution ends, ports used to remain in their last state, and that can be problem. These lines cleans all ports used before. Because of that, don’t use it at the beginning.
 
-
-Use this template:
-
-def main():
-    while True:
-        ...
-        
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        ...
-        pass
-    finally:
-        GPIO.cleanup()
-
+<pre>
+`def main():`  
+    `while True:`  
+        `...`
+`if __name__ == '__main__':`  
+    `try:`
+        `main()`  
+    `except KeyboardInterrupt:`  
+        `...`  
+    `finally:`  
+        `GPIO.cleanup()`  
+</pre>
 
 # Run programs at startup
-Run a script with rc.local or cron
-https://www.raspberrypi.org/documentation/linux/usage/rc-local.md https://www.raspberrypi.org/documentation/linux/usage/cron.md
+Run a script with [rc.local](https://www.raspberrypi.org/documentation/linux/usage/rc-local.md) or [cron](https://www.raspberrypi.org/documentation/linux/usage/cron.md).
+
+`sudo nano /etc/rc.local`
+
+At the end of the file, but before the `exit 0`, put the command that must be run during start, with absolute paths:
+`python3 /home/pi/example.py &`
+
+If the command runs continuously or is likely not to exit, you must be sure to fork the process by adding an ampersand to the end of the command, `&`. Otherwise, the script will not end and the Pi will not boot. The ampersand allows the command to run in a separate process and continue booting with the process running.
 
 
 # Remote access
+
+https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0
+
 IP static and SSH https://www.prometec.net/raspberry-pi-ip-estatica/
 
 https://www.raspberrypi.org/documentation/remote-access/ssh/unix.md https://www.raspberrypi.org/documentation/remote-access/ssh/
@@ -70,17 +68,89 @@ TCPIP https://www.prometec.net/tcpip/ Mascaras https://fireosoft.com.co/blogs/pa
 
 VNC https://www.prometec.net/rpi-acceso-remoto-grafico/ https://www.raspberrypi.org/documentation/remote-access/vnc/ Don’t use :1 when raspberry uses desktop interface, it will appear a grey screen. Use :2 Compartir ficheros https://www.atareao.es/tutorial/raspberry-pi-primeros-pasos/compartir-archivos-mediante-sftp-y-sshfs/ we can drag a folder of pi on the terminal to know the path and use cd.
 
-# Watchdog configuration
-watchdog https://www.raspberrypi.org/forums/viewtopic.php?p=1303872
+# Watchdog config
+SD cards tend to get corrupted easily, for problems with supply during writing commands. Because of that, use the raspberry in [read-only mode](https://learn.adafruit.com/read-only-raspberry-pi/overview). The script includes a reboot for kernel panics, but these are not the only problems that can freeze the raspi. Because of that, activate the [watchdog](https://www.raspberrypi.org/forums/viewtopic.php?p=1303872). The timer limit is 15 s.
 
-# 3G Dongle
+`modprobe bcm2835_wdt`  
+`echo "bcm2835_wdt" | sudo tee -a /etc/modules`  
 
+`apt-get install watchdog`  
+`update-rc.d watchdog defaults`  
 
-https://www.raspberrypi.org/forums/viewtopic.php?p=1197625 Important, don’t use any static ip. Autoconfiguration
+`nano /etc/watchdog.conf`  
 
-Shutdown wifi at startup
+Uncomment:
 
-http://www.magdiblog.fr/divers/ssh-connect-back-comment-garder-la-main-sur-un-raspberry-pi-connecte-a-internet-via-un-dongle-3g/ https://raspberrypi.stackexchange.com/questions/32384/ssh-into-raspberry-pi-with-3g-modem-connected https://raspberrypi.stackexchange.com/questions/46191/remote-control-a-raspberry-pi-currently-behind-a-restricted-wifi-network https://raspberrypi.stackexchange.com/questions/34556/how-to-connect-to-the-raspberry-pi-through-3g-dongle https://raspberrypi.stackexchange.com/questions/23803/how-can-i-access-my-pi-that-is-connected-to-a-3g-network-from-the-outside-intern https://www.reddit.com/r/raspberry_pi/comments/3bm7xd/how_to_ssh_into_raspi_using_3g_modem/ https://zieren.de/raspberry-pi/reverse-ssh-through-3gnat/ https://superuser.com/questions/888491/is-it-possbile-to-ssh-in-linux-from-a-3g-usb-stick-from-t-mobile-with-raspberry https://bandaancha.eu/foros/ofrece-movistar-ip-publica-conexion-3g-1727037 https://www.forocoches.com/foro/showthread.php?t=4923975 https://www.adslzone.net/foro/banda-ancha-movil-3g-y-4g.101/ip-publicas.361239/ https://www.matooma.com/es/noticias/las-tarjetas-sim-m2m-la-mejor-opcion-para-conectar-los-dispositivos http://director-it.com/index.php/es/ssoluciones/comunicacion-entre-maquinas/225-elegir-una-tarjeta-sim.html https://www.tendencias21.net/telefonica/Que-es-la-comunicacion-M2M_a801.html https://www.gemalto.com/latam/iot/m2m/soluciones/mim https://www.raspberrypi.org/forums/viewtopic.php?t=22312
+`#watchdog-device`  
+`#max-load-1`  
+
+Add:
+
+`watchdog-timeout = 15`  
+
+Save, reboot, test by command:
+
+`:(){ :|:& };:`  
+
+# Read only mode config  
+
+Temporary files are stored in RAM rather than on the SD card. Optionally, you can use a jumper or switch to boot the system into normal read/write mode to install new software or data. And, as normal, you still have easy access to the /boot partition if the SD card is mounted on another computer.
+
+* This does not work with the X11 desktop / PIXEL. It's strictly for Raspbian Lite right now. Graphical applications are still possible using SDL, Pygame and so forth, just not X11 at the moment.
+* Setting up read-only mode should be the very last step before deploying a project. THIS SEQUENCE IS IRREVERSIBLE. There is no uninstall script. There’s an option to boot into read/write mode, but nothing to back out all these changes.And back up the contents of your SD card first.
+
+## Install and Run
+
+Pi should be booted and on the network… like mentioned above, everything already configured and fully functional (and backed up) before taking this step. 
+
+From a command line prompt:  
+    `wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/read-only-fs.sh`  
+    `sudo bash read-only-fs.sh`  
+
+The [script](https://github.com/adafruit/Raspberry-Pi-Installer-Scripts/issues) will repeat all these stern warnings and make you verify at several steps whether to continue. Along the way you’ll be presented with a few options:
+
+`Enable boot-time read/write jumper? [y/N]`  
+
+This gives you the option to run the system in read/write mode by inserting a jumper across two pins. If you answer yes to this question, you’ll also be asked for a GPIO pin number. When there’s a jumper between this pin and ground, the system will boot into read/write mode and you can make changes (but remember to do a proper shutdown).
+Make sure the pin isn’t used by anything else. GPIO21 is easy to remember because it’s right at the end of the header. If you’re using I2S audio though, that requires GPIO21 for its own use, so you’ll want to pick another.  
+
+`Install GPIO-halt utility? [y/N]`  
+
+This installs a utility that initiates a proper shutdown when another GPIO pin is touched to ground. For a read-only system, you probably don’t need this… but if you have the system booted in read/write mode, this provides an option if you can’t log in and run a manual shutdown. This likewise will ask for a GPIO pin number like GPIO16.
+
+You’re Not Finished Yet. Test the modified system to make sure that the system boots and your application runs as intended. Try a pass with the read/write jumper and/or the gpio-halt button, if you’ve enabled either of those options.
+
+# 3G dongle configuration  
+
+First we have to increase max output current through USBs to avoid hubs like in the picture.  
+
+<img src="https://github.com/JaledMC/Learning-Raspi/blob/master/images/usb_pins.jpg" height="200" width="200">
+<img src="https://github.com/JaledMC/Learning-Raspi/blob/master/images/diy_hub.jpg" height="200" width="440"> 
+
+Add the following line to the bottom of /boot/config.txt   
+`max_usb_current=1`
+
+Now install usb mode switch to change the dongle function  
+`apt-get install usb-modeswitch usb-modeswitch-data`
+
+Create /etc/udev/rules.d/70-usb-modeswitch.rules with the following content:   
+`ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1f01", RUN+="/usr/sbin/usb_modeswitch -v 0x12d1 -p 0x1f01 -V 0x12d1 -P 0x1405 -J"`  
+
+This line is for Huawei E3372 and E3531 models. Others dongle may need different IDs. Now then raspi should detects a eth connection.  
+
+* lsusb before udev rule:  
+`root@raspberrypi:~# lsusb`  
+`Bus 001 Device 003: ID 12d1:1f01 Huawei Technologies Co., Ltd.`  
+`Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub`  
+
+* lsusb after udev rule:  
+`root@raspberrypi:~# lsusb`  
+`Bus 001 Device 003: ID 12d1:14dc Huawei Technologies Co., Ltd.`  
+`Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub`  
+
+To avoid wifi connections during boot, we have to set down the wlan, editing rc.local:  
+`sudo nano /etc/rc.local`  
+`sudo ifconfig wlan0 down`  
 
 # Code examples
 * [Led blink](https://github.com/JaledMC/Learning-Raspi/blob/master/Examples/blinkLed.py)
