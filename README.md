@@ -52,23 +52,21 @@ At the end of the file, but before the `exit 0`, put the command that must be ru
 If the command runs continuously or is likely not to exit, you must be sure to fork the process by adding an ampersand to the end of the command, `&`. Otherwise, the script will not end and the Pi will not boot. The ampersand allows the command to run in a separate process and continue booting with the process running.
 
 
-# Remote access
+# [Remote access](https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0)
+First, enable ssh access on **Interfaces**.
+Obtain the Raspberry IP, or make it static:
+`hostname -I`
+Access throught PC terminal with ssh:
+`ssh pi@<IP>`
+If you want to use GUI programs:
+`ssh -Y pi@<IP>`
+Now you can, for example:
+`idle3 &`
 
-https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0
+For [file transfer between machines](https://www.atareao.es/tutorial/raspberry-pi-primeros-pasos/compartir-archivos-mediante-sftp-y-sshfs), use `scp`:
+`scp "name with spaces.txt" pi@<IP>:`
 
-IP static and SSH https://www.prometec.net/raspberry-pi-ip-estatica/
-
-https://www.raspberrypi.org/documentation/remote-access/ssh/unix.md https://www.raspberrypi.org/documentation/remote-access/ssh/
-
-We have to enable ssh in ifconfigidsf2
-
-Right click on wifi-wire network and open settings We can use GUI programs with -Y
-
-To remove ip host ssh-keygen -R 192.168.3.10
-
-TCPIP https://www.prometec.net/tcpip/ Mascaras https://fireosoft.com.co/blogs/para-que-sirve-la-mascara-de-red/ static IP configuration and access ssh https://www.raspberrypi.org/documentation/remote-access/ssh/unix.md https://www.prometec.net/raspberry-pi-ip-estatica/ GUI remote access with VNC https://www.prometec.net/rpi-acceso-remoto-grafico/
-
-VNC https://www.prometec.net/rpi-acceso-remoto-grafico/ https://www.raspberrypi.org/documentation/remote-access/vnc/ Don’t use :1 when raspberry uses desktop interface, it will appear a grey screen. Use :2 Compartir ficheros https://www.atareao.es/tutorial/raspberry-pi-primeros-pasos/compartir-archivos-mediante-sftp-y-sshfs/ we can drag a folder of pi on the terminal to know the path and use cd.
+With [VNC](https://www.raspberrypi.org/documentation/remote-access/vnc/), Don’t use `:1` when raspberry uses desktop interface, it will appear a grey screen. Use `:2`.
 
 # Watchdog config
 SD cards tend to get corrupted easily, for problems with supply during writing commands. Because of that, use the raspberry in [read-only mode](https://learn.adafruit.com/read-only-raspberry-pi/overview). The script includes a reboot for kernel panics, but these are not the only problems that can freeze the raspi. Because of that, activate the [watchdog](https://www.raspberrypi.org/forums/viewtopic.php?p=1303872). The timer limit is 15 s.
