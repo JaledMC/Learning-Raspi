@@ -53,20 +53,20 @@ If the command runs continuously or is likely not to exit, you must be sure to f
 
 
 # [Remote access](https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0)
-First, enable ssh access on **Interfaces**.
-Obtain the Raspberry IP, or make it static:
-`hostname -I`
-Access throught PC terminal with ssh:
-`ssh pi@<IP>`
-If you want to use GUI programs:
-`ssh -Y pi@<IP>`
-Now you can, for example:
-`idle3 &`
+First, enable ssh access on **Interfaces**.  
+Obtain the Raspberry IP, or make it static:  
+`hostname -I`  
+Access throught PC terminal with ssh:  
+`ssh pi@<IP>`  
+If you want to use GUI programs:  
+`ssh -Y pi@<IP>`  
+Now you can, for example:  
+`idle3 &`  
+  
+For [file transfer between machines](https://www.atareao.es/tutorial/raspberry-pi-primeros-pasos/compartir-archivos-mediante-sftp-y-sshfs), use `scp`:  
+`scp "name with spaces.txt" pi@<IP>:`  
 
-For [file transfer between machines](https://www.atareao.es/tutorial/raspberry-pi-primeros-pasos/compartir-archivos-mediante-sftp-y-sshfs), use `scp`:
-`scp "name with spaces.txt" pi@<IP>:`
-
-With [VNC](https://www.raspberrypi.org/documentation/remote-access/vnc/), Don’t use `:1` when raspberry uses desktop interface, it will appear a grey screen. Use `:2`.
+With [VNC](https://www.raspberrypi.org/documentation/remote-access/vnc/), Don’t use `:1` when raspberry uses desktop interface, it will appear a grey screen. Use `:2`.  
 
 # Watchdog config
 SD cards tend to get corrupted easily, for problems with supply during writing commands. Because of that, use the raspberry in [read-only mode](https://learn.adafruit.com/read-only-raspberry-pi/overview). The script includes a reboot for kernel panics, but these are not the only problems that can freeze the raspi. Because of that, activate the [watchdog](https://www.raspberrypi.org/forums/viewtopic.php?p=1303872). The timer limit is 15 s.
