@@ -24,7 +24,7 @@ For **Opencv installation**:
 
 # GPIO control
 
-<img src="https://github.com/JaledMC/Learning-Raspi/blob/master/images/RBp.png" height="200" width="440"> 
+<img src="https://github.com/JaledMC/Learning-Raspi/blob/master/images/RBp.png" height="800" width="440"> 
 
 With GPIO pins, two different numerations can be used: BOARD (with the numerical position for each pin),
 and BCM, the special numeration of broadcom. But this last form is not the same for every raspberry model.  
