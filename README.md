@@ -1,28 +1,28 @@
 # Learning-Raspi
-Learning electronic and programming with Raspberry Pi
+Learning electronic and programming with Raspberry Pi  
 
 # Raspberry setup
-The easiest way to run with raspberry is installing NOOBS in a FAT32 SD. Other OS like Ubuntu Mate, Raspbian, or Chromium are valid too. PD: At present, all OS are 32 bits. 
+The easiest way to run with raspberry is installing NOOBS in a FAT32 SD. Other OS like Ubuntu Mate, Raspbian, or Chromium are valid too. PD: At present, all OS are 32 bits.   
 
 First step must be change default password, for security reasons, like ssh access. Use “sudo passwd” command. Username: pi Password: raspberry  
 
 Later, update the system:
-`sudo apt-get update`
-`sudo apt-get upgrade`
+`sudo apt-get update`  
+`sudo apt-get upgrade`  
 
-If raspbian freezes, disconnect usbs and HDMi can help. Disconnect supply could corrupt system files. Use ctrl+alt+f1 to switch to kernel, and use sudo reboot. To return to GUI, use ctrl+alt+f7  
+If raspbian freezes, disconnect usbs and HDMi can help. Disconnect supply could corrupt system files. Use ctrl+alt+f1 to switch to kernel, and use sudo reboot. To return to GUI, use ctrl+alt+f7.    
 
 For **Arduino installation**:  
 `sudo apt-get install arduino`  
 
 For **Opencv installation**: 
 `sudo apt-get install libhdf5-dev libhdf5-serial-dev`  
-`sudo apt-get install libqtwebkit4 libqt4-test`  
-`sudo pip install opencv-contrib-python`  
+`sudo apt-get install libqtwebkit4 libqt4-test`   
+`sudo pip install opencv-contrib-python`   
 
 # GPIO control
 With GPIO pins, two different numerations can be used: BOARD (with the numerical position for each pin),
-and BCM, the special numeration of broadcom. But this last form is not the same for every raspberry model.
+and BCM, the special numeration of broadcom. But this last form is not the same for every raspberry model.  
 
 When program finish, using a keyboard interruption or execution ends, ports used to remain in their last state, and that can be problem. These lines cleans all ports used before. Because of that, don’t use it at the beginning.
 
