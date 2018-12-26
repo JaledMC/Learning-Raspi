@@ -12,13 +12,13 @@ Later, update the system:
 
 If raspbian freezes, disconnect usbs and HDMi can help. Disconnect supply could corrupt system files. Use ctrl+alt+f1 to switch to kernel, and use sudo reboot. To return to GUI, use ctrl+alt+f7  
 
-For **Arduino installation**:
-`sudo apt-get install arduino`
+For **Arduino installation**:  
+`sudo apt-get install arduino`  
 
 For **Opencv installation**: 
-`sudo apt-get install libhdf5-dev libhdf5-serial-dev`
-`sudo apt-get install libqtwebkit4 libqt4-test`
-`sudo pip install opencv-contrib-python`
+`sudo apt-get install libhdf5-dev libhdf5-serial-dev`  
+`sudo apt-get install libqtwebkit4 libqt4-test`  
+`sudo pip install opencv-contrib-python`  
 
 # GPIO control
 With GPIO pins, two different numerations can be used: BOARD (with the numerical position for each pin),
